@@ -67,7 +67,7 @@ int val;
 while(n--){
   cin>>val;
   insertAtTail(head,val);
-  display(head);
+ // display(head);
 }
 display(head);
 }
