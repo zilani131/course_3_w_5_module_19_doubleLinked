@@ -265,11 +265,31 @@ else {
    delete temp;
 }
 }
+void dltAtTail(doubleNode* &head){
+
+if(head==NULL){
+    cout<<"Nothing to dlt";
+}
+else if(lengthList(head)==1){
+    head=NULL;
+    cout<<"The head is now empty"<<endl;
+    return;
+}
+else {
+   doubleNode *temp=head;
+   while(temp->Next->Next!=NULL)
+   {
+       temp=temp->Next;
+   }
+  delete temp->Next->Next;
+  temp->Next=NULL;
+}
+}
 int main()
 {
     doubleNode *head=NULL;
     cout<<"1.To insert at tail "<<endl<<"2.To insert at head "<<endl<<"3.Insert At specific position"<<endl<<"4.Search a value unique "<<endl<<"5.Search a value in duplicate"<<endl;
-    cout<<"6.Insert after a unique value"<<endl<<"7.Insert after double value "<<endl<<"8.Delete at head"<<endl;
+    cout<<"6.Insert after a unique value"<<endl<<"7.Insert after double value "<<endl<<"8.Delete at head"<<endl<<"9.Delete at tail"<<endl;
 
     cout<<"0.To exit"<<endl;
 
@@ -344,6 +364,9 @@ int main()
             break;
         case 8:
             dltAtHead(head);
+            break;
+        case 9:
+            dltAtTail(head);
         }
     }
 
