@@ -80,13 +80,69 @@ newNode->Next=head;
 head->Prev=newNode;
 head=newNode;
 }
+//////////////////////////insert at position//////////////
+void insertAtPos(doubleNode* &head,int val,int pos){
+    int s=lengthList(head)+1;
+
+if(pos<=0|| pos>s){
+    cout<<"The position is not valid";
+    return;
+}
+
+////////////////////position at head////////////////
+if(pos==1){
+    insertAtHead(head,val);
+    return;
+}
+if(pos==s){
+    insertAtTail(head,val);
+    return;
+}
+cout<<pos<<endl;
+int k=1;
+
+doubleNode *newNode=new doubleNode(val);
+doubleNode *temp=head;
+while(k<pos-1){
+//cout<<pos<<endl;
+    temp=temp->Next;
+    k++;
+}
+cout<<k;
+newNode->Next=temp->Next;
+temp->Next->Prev=newNode;
+temp->Next=newNode;
+newNode->Prev=temp;
+}
+
+int searchValueUni(doubleNode* &head,int val){
+if(head==NULL){
+    return -1;
+}
+else{
+        int k=1;
+    doubleNode* temp=head;
+    while(temp!=NULL){
+
+        if(temp->value==val){
+            return k;
+        }
+            k++;
+            temp=temp->Next;
+    }
+    return -1;
+}
+}
 int main(){
 doubleNode *head=NULL;
-cout<<"1.To insert at tail "<<endl<<"2.To insert at head "<<endl<<"0.To exit"<<endl;
+cout<<"1.To insert at tail "<<endl<<"2.To insert at head "<<endl<<"3.Insert At specific position"<<endl<<"4.Search a value unique "<<endl<<"5.Search a value in duplicate"<<endl;
+
+
+cout<<"0.To exit"<<endl;
 
 int c=100;
 while(c!=0){
-        int val;
+        int val,pos;
     cout<<"Enter the choice "<<endl;
     cin>>c;
     switch(c){
@@ -99,15 +155,31 @@ case 2:
     cout<<"Enter the value "<<endl;
     cin>>val;
     insertAtHead(head,val);
+    break;
+    /////////////////////////////////
+case 3:
+    cout<<"Enter the value ";
+    cin>>val;
+    cout<<"Enter the position ";
+    cin>>pos;
+insertAtPos(head,val,pos);
+    break;
+    ////////////////////////////////////////////////////search value unique///////////
+case 4:
+    cout<<"Enter the value ";
+    cin>>val;
+ int k =searchValueUni(head,val);
+ if(k==-1){
+    cout<<"The value is not in the list ";
+ }
+ else{
+    cout<<k<<endl;
+ }
+}
     }
-    }
+
     display(head);
-     if(lengthList(head)==-1){
-        cout<<"The list is NULL"<<endl;
-    }
-    else{
-       cout<<lengthList(head);
-    }
+
     displayReverse(head);
     if(lengthList(head)==-1){
         cout<<"The list is NULL"<<endl;
