@@ -15,6 +15,12 @@ doubleNode(int val)
     Prev=NULL;
 }
 };
+///////////////////////////return array///////////
+struct position{
+public:
+    int a[1000];
+
+};
 ////////////////////to display the linked list////////////////////
 void display(doubleNode *head){
 doubleNode *temp=head;
@@ -133,6 +139,38 @@ else{
     return -1;
 }
 }
+//////////////////////////////////search value in multiple value ///////////////////
+
+position searchValueDouble(doubleNode* &head,int val){
+if(head==NULL){
+ cout<<"The list is empty"<<endl;
+
+}
+else{
+        position pos;
+
+        int k=1;
+        int ctn=1;
+    doubleNode* temp=head;
+    while(temp!=NULL){
+
+        if(temp->value==val){
+            pos.a[k]=ctn;
+            k++;
+        }
+            ctn++;
+            temp=temp->Next;
+    }
+if(k==1){
+cout<<"Value is not in the list"<<endl;
+
+}
+else {
+    pos.a[0]=k;
+    return pos;
+}
+}
+}
 int main(){
 doubleNode *head=NULL;
 cout<<"1.To insert at tail "<<endl<<"2.To insert at head "<<endl<<"3.Insert At specific position"<<endl<<"4.Search a value unique "<<endl<<"5.Search a value in duplicate"<<endl;
@@ -168,13 +206,23 @@ insertAtPos(head,val,pos);
 case 4:
     cout<<"Enter the value ";
     cin>>val;
- int k =searchValueUni(head,val);
+ int k;
+ k=searchValueUni(head,val);
  if(k==-1){
     cout<<"The value is not in the list ";
  }
  else{
     cout<<k<<endl;
  }
+ break;
+case 5:
+   cout<<"Enter the value ";
+    cin>>val;
+    position pos=searchValueDouble(head,val);
+    for(int i=1;i<pos.a[0];i++){
+        cout<<pos.a[i]<<" ";
+    }
+    break;
 }
     }
 
