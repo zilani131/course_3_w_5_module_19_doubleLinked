@@ -17,12 +17,6 @@ public:
     }
 };
 ///////////////////////////return array///////////
-/*struct position
-{
-public:
-    int a[1000];
-
-};*/
 class position
 {
 public:
@@ -171,14 +165,12 @@ int searchValueUni(doubleNode* &head,int val)
     }
 }
 //////////////////////////////////search value in multiple value ///////////////////
- position searchValueDouble(doubleNode* &head,int val)
+position * searchValueDouble(position * pos,doubleNode* &head,int val)
 {
-    position pos;
     if(head==NULL)
     {
-        pos.a[0]=-1;
+        pos->a[0]=-1;
         return pos;
-
     }
     else
     {
@@ -192,7 +184,7 @@ int searchValueUni(doubleNode* &head,int val)
 
             if(temp->value==val)
             {
-                pos.a[k]=ctn;
+                pos->a[k]=ctn;
                 k++;
             }
             ctn++;
@@ -200,13 +192,13 @@ int searchValueUni(doubleNode* &head,int val)
         }
         if(k==1)
         {
-            pos.a[0]=-1;
+            pos->a[0]=-1;
             return pos;
 
         }
         else
         {
-            pos.a[0]=k;
+            pos->a[0]=k;
             return pos;
         }
     }
@@ -230,46 +222,32 @@ void insertAfterUniValue(doubleNode *&head,int searchVal,int insertVal)
 ///////////////////////////////insert after double value///////
 void insertAfterDouValue(doubleNode *&head,int searchVal,int insertVal)
 {
-    position k=searchValueDouble(head,searchVal);
-    if(k.a[0]==-1)
+    position * k;
+    k=searchValueDouble(k,head,searchVal);
+    if(k->a[0]==-1)
     {
         cout<<"There is not any value ";
     }
 
     else
     {
-        for(int i=1; i<k.a[0]; i++)
+        for(int i=1; i<k->a[0]; i++)
         {
-            insertAtPos(head,insertVal,k.a[i]+1);
-            for(int j=i+1; j<k.a[0]; j++)
+            insertAtPos(head,insertVal,k->a[i]+1);
+            for(int j=i+1; j<k->a[0]; j++)
             {
-                k.a[j]++;
+                k->a[j]++;
             }
         }
     }
 
 }
-void dltAtHead(doubleNode *&head){
-if(head==NULL){
-    cout<<"Nothing to dlt";
-}
-else if(lengthList(head)==1){
-    head=NULL;
-    cout<<"The head is now empty"<<endl;
-    return;
-}
-else {
-   doubleNode *temp=head;
-   head=temp->Next;
-   head->Prev=NULL;
-   delete temp;
-}
-}
+
 int main()
 {
     doubleNode *head=NULL;
     cout<<"1.To insert at tail "<<endl<<"2.To insert at head "<<endl<<"3.Insert At specific position"<<endl<<"4.Search a value unique "<<endl<<"5.Search a value in duplicate"<<endl;
-    cout<<"6.Insert after a unique value"<<endl<<"7.Insert after double value "<<endl<<"8.Delete at head"<<endl;
+    cout<<"6.Insert after a unique value"<<endl<<"7.Insert after double value "<<endl;
 
     cout<<"0.To exit"<<endl;
 
@@ -278,7 +256,7 @@ int main()
     {
         int val,pos;
         int searchVal;
-      position po;
+
         cout<<"Enter the choice "<<endl;
         cin>>c;
         switch(c)
@@ -317,18 +295,16 @@ int main()
             }
             break;
         case 5:
-
-
             cout<<"Enter the value ";
             cin>>val;
-            po=searchValueDouble(head,val);
-            for(int i=1; i<po.a[0]; i++)
+            position * pos;
+            pos = searchValueDouble(pos,head,val);
+            for(int i=1; i<pos->a[0]; i++)
             {
-                cout<<po.a[i]<<" ";
+                cout<<pos->a[i]<<" ";
             }
             break;
-
-       case 6:
+        case 6:
             cout<<"Enter the value after which you want to add the value ";
             cin>>searchVal;
             cout<<"Enter the value ";
@@ -342,8 +318,6 @@ int main()
             cin>>val;
             insertAfterDouValue(head,searchVal,val);
             break;
-        case 8:
-            dltAtHead(head);
         }
     }
 
