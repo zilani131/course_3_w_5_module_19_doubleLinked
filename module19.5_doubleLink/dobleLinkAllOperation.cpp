@@ -285,12 +285,68 @@ else {
   temp->Next=NULL;
 }
 }
+/////////////////////////////////////////dlt at pos///////////////////////////////
+void dltAtPos(doubleNode* &head,int pos){
+  int s=lengthList(head);
+
+    if(pos<=0|| pos>s)
+    {
+        cout<<"The position is not valid";
+        return;
+    }
+
+////////////////////position at head////////////////
+    if(pos==1)
+    {
+        dltAtHead(head);
+        return;
+    }
+    if(pos==s)
+    {
+        dltAtTail(head);
+        return;
+    }
+    //cout<<pos<<endl;
+    int k=1;
+
+
+    doubleNode *temp1=head;
+    doubleNode *temp2;
+    while(k<pos-1)
+    {
+//cout<<pos<<endl;
+        temp1=temp1->Next;
+        k++;
+    }
+    cout<<k;
+temp2=temp1->Next->Next;
+delete temp1->Next;
+temp1->Next=temp2;
+temp2->Prev=temp1;
+
+}
+////////////////////delete value unique ////////
+void dltValUni(doubleNode* &head,int val){
+ int k=searchValueUni(head,val);
+
+    if(k==-1)
+    {
+        cout<<"The value is not in the list"<<endl;
+    }
+    else
+    {
+
+       dltAtPos(head,k);
+    }
+
+}
+
 int main()
 {
     doubleNode *head=NULL;
     cout<<"1.To insert at tail "<<endl<<"2.To insert at head "<<endl<<"3.Insert At specific position"<<endl<<"4.Search a value unique "<<endl<<"5.Search a value in duplicate"<<endl;
-    cout<<"6.Insert after a unique value"<<endl<<"7.Insert after double value "<<endl<<"8.Delete at head"<<endl<<"9.Delete at tail"<<endl;
-
+    cout<<"6.Insert after a unique value"<<endl<<"7.Insert after double value "<<endl<<"8.Delete at head"<<endl<<"9.Delete at tail"<<endl<<"10.Delete at specific position"<<endl;
+    cout<<"11.Deletion by Value (Unique List)"<<endl<<"12.Deletion by Value(Duplication enabled List)"<<endl;
     cout<<"0.To exit"<<endl;
 
     int c=100;
@@ -367,6 +423,17 @@ int main()
             break;
         case 9:
             dltAtTail(head);
+            break;
+        case 10:
+            cout<<"Enter the position"<<endl;
+            cin>>pos;
+            dltAtPos(head,pos);
+            break;
+        case 11:
+            cout<<"Enter the value"<<endl;
+            cin>>val;
+            dltValUni(head,val);
+            break;
         }
     }
 
