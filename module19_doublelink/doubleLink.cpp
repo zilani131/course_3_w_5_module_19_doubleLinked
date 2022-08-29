@@ -46,7 +46,7 @@ if(temp==NULL){
   return -1;
 }
 int k=1;
-while(temp!=NULL){
+while(temp->Next!=NULL){
 
     //cout<<temp->value<<" ";
     temp=temp->Next;
@@ -54,7 +54,7 @@ while(temp!=NULL){
 }
 return k;
 }
-
+///////////////////////////////////////insertAt tail///////////////
 void insertAtTail(doubleNode* &head,int val){
 doubleNode* newNode=new doubleNode(val);
 if(head==NULL){
@@ -69,7 +69,17 @@ temp->Next=newNode;
 newNode->Prev=temp;
 return;
 }
-
+//////////////////////////////////insertAt head//////////////////
+void insertAtHead(doubleNode* &head,int val){
+doubleNode* newNode=new doubleNode(val);
+if(head==NULL){
+    head=newNode;
+    return;
+}
+newNode->Next=head;
+head->Prev=newNode;
+head=newNode;
+}
 int main(){
 doubleNode *head=NULL;
 cout<<"1.To insert at tail "<<endl<<"2.To insert at head "<<endl<<"0.To exit"<<endl;
@@ -88,10 +98,16 @@ case 1:
 case 2:
     cout<<"Enter the value "<<endl;
     cin>>val;
-    //insertAtHead(head,val);
+    insertAtHead(head,val);
     }
     }
     display(head);
+     if(lengthList(head)==-1){
+        cout<<"The list is NULL"<<endl;
+    }
+    else{
+       cout<<lengthList(head);
+    }
     displayReverse(head);
     if(lengthList(head)==-1){
         cout<<"The list is NULL"<<endl;
