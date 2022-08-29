@@ -340,7 +340,28 @@ void dltValUni(doubleNode* &head,int val){
     }
 
 }
+///////////////////////////delete duplicationvalue///
+void dltDupVal(doubleNode* &head,int val){
+position k=searchValueDouble(head,val);
+    if(k.a[0]==-1)
+    {
+        cout<<"There is not any value ";
+    }
 
+    else
+    {
+        for(int i=1; i<k.a[0]; i++)
+        {
+            dltAtPos(head,k.a[i]);
+            for(int j=i+1; j<k.a[0]; j++)
+            {
+                k.a[j]--;
+            }
+        }
+    }
+
+
+}
 int main()
 {
     doubleNode *head=NULL;
@@ -433,6 +454,11 @@ int main()
             cout<<"Enter the value"<<endl;
             cin>>val;
             dltValUni(head,val);
+            break;
+        case 12:
+            cout<<"Enter the value"<<endl;
+            cin>>val;
+            dltDupVal(head,val);
             break;
         }
     }
